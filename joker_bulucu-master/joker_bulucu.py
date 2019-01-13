@@ -70,7 +70,7 @@ class JokerFinder:
         username_field.send_keys('berk-cinar@hotmail.com')
         password_field = self.driver.find_element_by_id('password')
         password_field.click()
-        password_field.send_keys('kangal85')
+        password_field.send_keys('Joker2018Joker')
         self.driver.find_element_by_id('ys-fastlogin-button').click()
 
     def entry_page(self):
@@ -82,15 +82,25 @@ class JokerFinder:
 
         try:
             joker=self.driver.find_element_by_xpath('//*[@id="cboxContent"]')
+
+            self.driver.find_element_by_css_selector('#colorbox')
+
+
             if joker.is_enabled():
 
                 print("joker çıktı")
-
                 time.sleep(10)
 
                 tikla=self.driver.find_element_by_xpath('//*[@id="cboxLoadedContent"]/div/div/div[2]/div[2]/a')
 
-                print("kalan sure")
+
+
+                kalan_sure=self.driver.find_element_by_xpath('//*[@id="cboxLoadedContent"]/div/div/div[3]/p[2]/span[2]').text
+
+                print("kalan sure",kalan_sure)
+
+                time.sleep(5)
+
                 tikla.click()
 
             else:
@@ -111,6 +121,8 @@ class JokerFinder:
         pass
 
     def _run(self):
+
+
         self.driver.get("https://www.yemeksepeti.com" + self.places[self.current_page])
 
         self.login()
@@ -121,16 +133,13 @@ class JokerFinder:
 
             time.sleep(3)
 
-
-            self.entry_page()
+            self.click_joker()
 
             time.sleep(3)
 
+            # self.entry_page()
 
-            self.click_joker()
-
-
-            time.sleep(5)
+            time.sleep(100)
 
             '''
 kapat                   //*[@id="cboxClose"]
@@ -144,8 +153,11 @@ ilk jokerin resmi           //*[@id="cboxLoadedContent"]/div/div/div[2]/div[2]/a
 
 2. jokerin resmi            //*[@id="cboxLoadedContent"]/div/div/div[2]/div[2]/a[2]/div[2]/img
 
+joker istiyo musun //*[@id="colorbox"]
 
 
+istiyorum               //*[@id="cboxLoadedContent"]/div/div/div[2]/div/div/a[2] 
+istemiyorum             //*[@id="cboxLoadedContent"]/div/div/div[2]/div/div/a[1]
             '''
 
             self.change_page()
